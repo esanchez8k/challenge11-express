@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const router = require('express').Router();
+const notes = require('../db/db.json');
+const { v4: uuidv4 } = require('uuid');
+
 
 // Route for retrieving all saved notes
-router.get('/api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
   // Read the db.json file
   fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
     if (err) {
@@ -20,7 +23,7 @@ router.get('/api/notes', (req, res) => {
 });
 
 // Route for saving a new note
-router.post('/api/notes', (req, res) => {
+router.post('/notes', (req, res) => {
   // Read the db.json file
   fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
     if (err) {
@@ -32,7 +35,7 @@ router.post('/api/notes', (req, res) => {
     const notes = JSON.parse(data);
 
     // Generate a unique ID for the new note
-    const newNoteId = generateUniqueId();
+    const newNoteId = uuidv4();
 
     // Create a new note object with the provided data and generated ID
     const newNote = {
@@ -57,10 +60,5 @@ router.post('/api/notes', (req, res) => {
   });
 });
 
-// Helper function to generate a unique ID for the notes
-function generateUniqueId() {
-  // Implementation depends on your preference, you can use a package like "uuid" or implement your own logic
-  // Example: return Math.random().toString(36).substr(2, 9);
-}
 
 module.exports = router;
