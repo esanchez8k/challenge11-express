@@ -2,7 +2,7 @@ const path = require('path');
 const router = require('express').Router();
 
 // Route for the landing page
-router.get('/', (req, res) => {
+router.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
