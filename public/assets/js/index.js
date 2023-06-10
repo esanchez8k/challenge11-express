@@ -1,20 +1,3 @@
-const express = require('express');
-const htmlRoutes = require('./routes/htmlRoutes');
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(express.static('public'));
-
-// HTML routes
-app.use('/', htmlRoutes);
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
